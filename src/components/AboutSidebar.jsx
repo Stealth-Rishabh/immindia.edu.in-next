@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import img from "../assets/breadcrumb.png";
+import Image from "next/image";
+
+const img = "/assets/breadcrumb.png";
 
 const AboutSidebar = ({ sidebarLinks, className }) => {
   const [isSticky, setIsSticky] = useState(false);
@@ -39,7 +41,9 @@ const AboutSidebar = ({ sidebarLinks, className }) => {
         isSticky ? "md:sticky md:top-4" : ""
       }`}
     >
-      <div className={`flex flex-col h-full p-6 ${className} border-gray-200 rounded-xl`}>
+      <div
+        className={`flex flex-col h-full p-6 ${className} border-gray-200 rounded-xl`}
+      >
         <h2 className="mb-4 text-xl font-bold text-white">On this page</h2>
         <nav className="mb-6 space-y-2">
           {sidebarLinks.map((link) => (
@@ -59,15 +63,17 @@ const AboutSidebar = ({ sidebarLinks, className }) => {
             </a>
           ))}
         </nav>
-        <Link to="/contact-us">
+        <Link href="/contact-us">
           <Button className="w-full px-4 py-2 mb-6 font-bold text-white rounded bg-primary-color hover:bg-pink-900">
             Apply Online
           </Button>
         </Link>
         <div className="relative flex-grow h-56 overflow-hidden rounded-md">
-          <img
+          <Image
             src={img}
             alt="cta"
+            width={400}
+            height={224}
             className="absolute inset-0 object-cover w-full h-full"
           />
           <div className="absolute inset-0 bg-black opacity-40"></div>
@@ -75,7 +81,7 @@ const AboutSidebar = ({ sidebarLinks, className }) => {
             <p className="mb-3 text-xl font-semibold text-center max-w-40">
               Build Your Career
             </p>
-            <Link to="/contact-us">
+            <Link href="/contact-us">
               <Button
                 variant="outline"
                 className="text-white transition-colors bg-transparent border-white hover:bg-white hover:text-black"

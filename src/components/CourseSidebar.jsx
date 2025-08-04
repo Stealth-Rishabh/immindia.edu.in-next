@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ChevronDown, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,7 +7,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import img from "../assets/breadcrumb.png";
+import Image from "next/image";
+
+const img = "/assets/breadcrumb.png";
 
 export default function CourseSidebar() {
   const [isSticky, setIsSticky] = useState(false);
@@ -169,7 +171,7 @@ export default function CourseSidebar() {
                 {category.courses.map((course) => (
                   <Link
                     key={course.href}
-                    to={course.href}
+                    href={course.href}
                     className="block px-8 py-2 text-sm text-gray-500/90 transition-all duration-100  rounded hover:pl-6 hover:text-primary-color hover:bg-gray-100 hover:font-medium"
                   >
                     {course.label}
@@ -180,15 +182,17 @@ export default function CourseSidebar() {
           ))}
         </nav>
 
-        <Link to="/contact-us">
+        <Link href="/contact-us">
           <Button className="w-full px-4 py-2 mb-6 font-bold text-white rounded bg-primary-color hover:bg-red-600 transition-colors duration-200">
             Apply Online
           </Button>
         </Link>
         <div className="relative flex-grow overflow-hidden rounded-md h-56">
-          <img
+          <Image
             src={img}
             alt="Discover Our Partnerships"
+            width={400}
+            height={224}
             className="absolute inset-0 object-cover w-full h-full"
           />
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
@@ -196,7 +200,7 @@ export default function CourseSidebar() {
             <p className="mb-3 text-xl font-semibold text-center">
               Build Your Career
             </p>
-            <Link to="/contact-us">
+            <Link href="/contact-us">
               <Button
                 variant="outline"
                 className="text-white transition-colors bg-transparent border-white hover:bg-white hover:text-black"

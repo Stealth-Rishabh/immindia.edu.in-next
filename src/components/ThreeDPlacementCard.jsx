@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, memo, useCallback } from "react";
+import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
 import { Building2, ExternalLink } from "lucide-react";
@@ -83,7 +84,7 @@ export default memo(function ThreeDPlacementCard({
 
         {/* Optimized image container */}
         <div className="absolute inset-0 overflow-hidden rounded-md">
-          <img
+          <Image
             src={image}
             alt={name}
             width={250}
@@ -110,7 +111,13 @@ export default memo(function ThreeDPlacementCard({
                 .join(" ")}
             </h3>
             <div className="mb flex items-center gap-2 py-2 scale-75 bg-white rounded">
-              <img src={logo} alt="logo" className="w-auto mx-auto h-8" />
+              <Image
+                src={logo}
+                alt="logo"
+                width={32}
+                height={32}
+                className="w-auto mx-auto h-8"
+              />
             </div>
           </div>
         </div>

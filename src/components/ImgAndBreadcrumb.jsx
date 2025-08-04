@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,7 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 import {
@@ -33,22 +34,21 @@ const ImgAndBreadcrumb = ({ imageSrc, imageAlt, breadcrumbItems, title }) => {
 
   return (
     <div className="relative flex items-end justify-center h-max">
-      <img
+      <Image
         src={imageSrc}
         alt={imageAlt || "Image"}
-        className="object-cover w-full h-min max-h-[30rem] shadow-sm -z-10 "
         width={1920}
         height={1080}
-        fetchPriority="high"
-        decoding="async"
+        className="object-cover w-full h-min max-h-[30rem] shadow-sm -z-10"
+        priority
       />
       {/* <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-black/70 to-black/30"></div> */}
       {title && (
-      <div className=" absolute top-1/2 left-1/2 transform w-max max-w-[80%] -translate-x-1/2 -translate-y-1/2 mx-3  p-3 sm:p-5 bg-black/50 rounded-md ">
-        <WordPullUp
-          words={title}
-          className="sm:text-6xl text-3xl  text-white sm:font-extrabold  tracking-widest   leading-tight sm:leading-none"
-        />
+        <div className=" absolute top-1/2 left-1/2 transform w-max max-w-[80%] -translate-x-1/2 -translate-y-1/2 mx-3  p-3 sm:p-5 bg-black/50 rounded-md ">
+          <WordPullUp
+            words={title}
+            className="sm:text-6xl text-3xl  text-white sm:font-extrabold  tracking-widest   leading-tight sm:leading-none"
+          />
         </div>
       )}
       <Breadcrumb className=" absolute z-10 -mb-8 transition-all duration-300 ease-in-out hover:drop-shadow-2xl drop-shadow-xl hover:scale-105">
@@ -61,7 +61,7 @@ const ImgAndBreadcrumb = ({ imageSrc, imageAlt, breadcrumbItems, title }) => {
                   <>
                     <BreadcrumbLink asChild className="">
                       <Link
-                        to={item.href}
+                        href={item.href}
                         className="text-lg font-semibold text-white transition-colors duration-100 ease-in-out hover:text-slate-100 "
                       >
                         {item.label}
@@ -83,11 +83,11 @@ const ImgAndBreadcrumb = ({ imageSrc, imageAlt, breadcrumbItems, title }) => {
           ) : (
             // Mobile view: show first, ellipsis, and last two
             <>
-              {breadcrumbItems.length > 0 && (
+              {breadcrumbItems.length > 0 && breadcrumbItems[0].href && (
                 <BreadcrumbItem className="text-white mobile-breadcrumb-item">
                   <BreadcrumbLink asChild className="text-white">
                     <Link
-                      to={breadcrumbItems[0].href}
+                      href={breadcrumbItems[0].href}
                       className=" font-semibold text-white transition-colors duration-100 ease-in-out hover:text-slate-100 "
                     >
                       {breadcrumbItems[0].label}
@@ -96,12 +96,14 @@ const ImgAndBreadcrumb = ({ imageSrc, imageAlt, breadcrumbItems, title }) => {
                 </BreadcrumbItem>
               )}
               {breadcrumbItems.length > ITEMS_TO_DISPLAY && (
-                <>
+                <React.Fragment>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
                     <Drawer open={open} onOpenChange={setOpen}>
-                      <DrawerTrigger aria-label="Toggle Menu">
-                        <Ellipsis className="w-4 h-4" />
+                      <DrawerTrigger asChild aria-label="Toggle Menu">
+                        <button className="flex items-center justify-center w-6 h-6">
+                          <Ellipsis className="w-4 h-4" />
+                        </button>
                       </DrawerTrigger>
                       <DrawerContent>
                         <DrawerHeader className="text-left">
@@ -114,7 +116,7 @@ const ImgAndBreadcrumb = ({ imageSrc, imageAlt, breadcrumbItems, title }) => {
                           {breadcrumbItems.slice(1, -2).map((item, index) => (
                             <Link
                               key={index}
-                              to={item.href ? item.href : "#"}
+                              href={item.href ? item.href : "#"}
                               className="py-1 text-sm text-white"
                             >
                               {item.label}
@@ -129,24 +131,26 @@ const ImgAndBreadcrumb = ({ imageSrc, imageAlt, breadcrumbItems, title }) => {
                       </DrawerContent>
                     </Drawer>
                   </BreadcrumbItem>
-                </>
+                </React.Fragment>
               )}
               {breadcrumbItems.slice(1).map((item, index) => (
-                <BreadcrumbItem key={index} className="text-white">
+                <React.Fragment key={index}>
                   <BreadcrumbSeparator />
-                  {item.href ? (
-                    <BreadcrumbLink
-                      asChild
-                      className="truncate max-w-20 md:max-w-none text-white"
-                    >
-                      <Link to={item.href}>{item.label}</Link>
-                    </BreadcrumbLink>
-                  ) : (
-                    <BreadcrumbPage className="truncate max-w-20 md:max-w-none text-white">
-                      {item.label}
-                    </BreadcrumbPage>
-                  )}
-                </BreadcrumbItem>
+                  <BreadcrumbItem className="text-white">
+                    {item.href ? (
+                      <BreadcrumbLink
+                        asChild
+                        className="truncate max-w-20 md:max-w-none text-white"
+                      >
+                        <Link href={item.href}>{item.label}</Link>
+                      </BreadcrumbLink>
+                    ) : (
+                      <BreadcrumbPage className="truncate max-w-20 md:max-w-none text-white">
+                        {item.label}
+                      </BreadcrumbPage>
+                    )}
+                  </BreadcrumbItem>
+                </React.Fragment>
               ))}
             </>
           )}

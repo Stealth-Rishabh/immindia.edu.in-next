@@ -14,6 +14,12 @@ const nextConfig = {
         port: "",
         pathname: "/api/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

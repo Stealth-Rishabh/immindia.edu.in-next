@@ -1,29 +1,40 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Play, X } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
+import { useState } from "react";
+import { Play, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import Image from "next/image";
 
-export default function VideoDialog({ videoId, title, thumbnailUrl, className,videoSrc,imageAlt }) {
-  const [open, setOpen] = useState(false)
+export default function VideoDialog({
+  videoId,
+  title,
+  thumbnailUrl,
+  className,
+  videoSrc,
+  imageAlt,
+}) {
+  const [open, setOpen] = useState(false);
 
   // Use provided thumbnail or fallback to YouTube's thumbnail
-  const thumbnail = thumbnailUrl || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+  const thumbnail =
+    thumbnailUrl || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
     <>
       <div
         className={cn(
           "group relative cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:shadow-xl",
-          className,
+          className
         )}
         onClick={() => setOpen(true)}
       >
         <div className=" w-full h-full overflow-hidden">
-          <img
+          <Image
             src={thumbnail}
             alt={imageAlt || "Video thumbnail"}
+            width={400}
+            height={225}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
@@ -71,5 +82,5 @@ export default function VideoDialog({ videoId, title, thumbnailUrl, className,vi
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
