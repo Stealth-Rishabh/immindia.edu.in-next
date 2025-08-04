@@ -1,4 +1,21 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.immindia.edu.in",
+        port: "",
+        pathname: "/api/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "immindia.edu.in",
+        port: "",
+        pathname: "/api/uploads/**",
+      },
+    ],
+  },
+};
 
 export default nextConfig;
