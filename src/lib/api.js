@@ -1,10 +1,10 @@
 /* This JavaScript code snippet is defining an object `API_ENDPOINTS` that contains various API
 endpoints based on the `API_BASE_URL` value. Here's a breakdown of what the code is doing: */
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 if (!API_BASE_URL) {
   throw new Error(
-    "VITE_API_BASE_URL is not defined. Please check your .env file."
+    "NEXT_PUBLIC_API_BASE_URL is not defined. Please check your .env file."
   );
 }
 
