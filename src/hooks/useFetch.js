@@ -34,7 +34,7 @@ export const useFetch = (endpoint, options = {}) => {
     };
 
     fetchData();
-  }, [endpoint, JSON.stringify(options)]);
+  }, [endpoint, options]);
 
   return { data, loading, error };
 };

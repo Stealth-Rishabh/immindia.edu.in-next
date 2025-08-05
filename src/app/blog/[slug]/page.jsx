@@ -282,4 +282,4 @@ const Skeleton = () => {
       </section>
     </main>
   );
-}; 
+};

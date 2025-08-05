@@ -6,17 +6,10 @@ import PgdmProgramTab from "../PgdmProgramTab";
 import ProjectTab from "../ProjectTab";
 import ImgAndBreadcrumb from "../../../components/ImgAndBreadcrumb";
 import { useState, useEffect } from "react";
-import { useFetch } from "../../../hooks/useFetch";
-import SemesterTabs from "../SemesterTabs";
 import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/magicui/dot-pattern";
-import { API_ENDPOINTS } from "@/lib/api";
 
-const Pgdm = () => {
-  const { data } = useFetch("/api/indexBanner.php");
-  const [bannerImage, setBannerImage] = useState(
-    `${API_ENDPOINTS.UPLOADS}/680fd14484b0a.png`
-  ); // Default image
+const PgdmPage = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -31,30 +24,12 @@ const Pgdm = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    if (data) {
-      const mobileImage = data.find(
-        (item) => item.category === "PGDM Mobile"
-      )?.url;
-      const desktopImage = data.find((item) => item.category === "PGDM")?.url;
-
-      if (isMobile && mobileImage) {
-        setBannerImage(mobileImage);
-      } else if (!isMobile && desktopImage) {
-        setBannerImage(desktopImage);
-      } else if (desktopImage) {
-        setBannerImage(desktopImage);
-      } else if (mobileImage) {
-        setBannerImage(mobileImage);
-      }
-    }
-  }, [data, isMobile]);
-
   const breadcrumbItems = [
     { href: "/", label: "Home" },
     { href: "/programs/pgdm", label: "Programs" },
     { label: "PGDM" },
   ];
+
   return (
     <div className="relative min-h-screen">
       <ImgAndBreadcrumb
@@ -88,24 +63,12 @@ const Pgdm = () => {
                 >
                   PGDM
                 </TabsTrigger>
-                {/* <TabsTrigger
-              value="curriculum"
-              className="data-[state=active]:bg-pink-900 h-10 data-[state=active]:text-white"
-            >
-              Curriculum
-            </TabsTrigger> */}
                 <TabsTrigger
                   value="projects"
                   className="data-[state=active]:bg-pink-900 h-10 data-[state=active]:text-white"
                 >
                   Projects
                 </TabsTrigger>
-                {/* <TabsTrigger
-              value="global"
-              className="data-[state=active]:bg-pink-900 h-10 data-[state=active]:text-white"
-            >
-              IMM Goes Global
-            </TabsTrigger> */}
               </TabsList>
               <TabsContent value="pgdm" className="mt-6">
                 <div className="space-y-8 sm:px-4">
@@ -124,10 +87,10 @@ const Pgdm = () => {
               </TabsContent>
             </Tabs>
           </div>
-        </Container>{" "}
+        </Container>
       </section>
     </div>
   );
 };
 
-export default Pgdm;
+export default PgdmPage;

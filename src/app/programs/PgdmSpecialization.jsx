@@ -2,9 +2,10 @@
 
 import { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { AnimatedBeam } from "@/components/magicui/animated-beam"; // Changed from ui to magicui
 import Image from "next/image";
 
+// ... rest of the component stays the same
 const Circle = forwardRef(({ className, children }, ref) => {
   return (
     <div

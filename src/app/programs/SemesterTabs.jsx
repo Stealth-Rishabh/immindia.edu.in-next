@@ -2,7 +2,7 @@
 import { BookOpen } from "lucide-react";
 import { useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { AnimatedBeamMultipleOutputDemo } from "./AnimatedCertification";
 import { curriculum } from "./data/pgdm-program-data";
 import Image from "next/image";
@@ -140,7 +140,7 @@ export default function SemesterTabs() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>{" "}
+      </div>
     </section>
   );
 }
