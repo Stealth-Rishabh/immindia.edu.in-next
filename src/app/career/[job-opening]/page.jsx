@@ -418,4 +418,4 @@ export default function CareerDetails() {
       </div>
     </div>
   );
-}
+} 
