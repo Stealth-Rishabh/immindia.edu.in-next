@@ -1,4 +1,4 @@
-"use client";;
+"use client";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -15,7 +15,7 @@ export default function WordRotate({
     transition: { duration: 0.25, ease: "easeOut" },
   },
 
-  className
+  className,
 }) {
   const [index, setIndex] = useState(0);
 
@@ -29,12 +29,16 @@ export default function WordRotate({
   }, [words, duration]);
 
   return (
-    (<div className="overflow-hidden py-2">
+    <div className="overflow-hidden py-2">
       <AnimatePresence mode="wait">
-        <motion.h1 key={words[index]} className={cn(className)} {...framerProps}>
+        <motion.h1
+          key={words[index]}
+          className={cn(className)}
+          {...framerProps}
+        >
           {words[index]}
         </motion.h1>
       </AnimatePresence>
-    </div>)
+    </div>
   );
 }

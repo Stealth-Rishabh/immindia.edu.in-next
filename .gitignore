@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# imm lp
+/public/imm
+/public/sitemap.xml
+/public/robots.txt
+
+# stats
+/stats.html
+
