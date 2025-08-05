@@ -59,7 +59,7 @@ export default function Footer() {
     { name: "Apply Now", href: "https://admissions.immindia.edu.in/" },
     // { name: "Scholarship Scheme", path: "/scholarship-scheme" },
     // { name: "Scholarship Form", path: "/scholarship-form" },
-    { name: "Gallery", path: "/gallery" },
+    { name: "Gallery", path: "life-at-imm/gallery" },
     { name: "Career", path: "/career" },
 
     // { name: "Enquire Now", href: "https://admissions.immindia.edu.in/" },
