@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "../components/Providers";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import { generateMetadataForPath } from "@/lib/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,26 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "IMM - Best MBA Colleges in Delhi NCR | PGDM Colleges in India",
-  description:
-    "Institute of marketing & management is a top-ranked MBA college in Delhi. Industry-focused curriculum, excellent placements, and strong alumni network.",
-  keywords:
-    "MBA colleges in Delhi, PGDM colleges in India, IMM, Institute of Marketing & Management",
-  openGraph: {
-    title: "IMM - Best MBA Colleges in Delhi NCR | PGDM Colleges in India",
-    description:
-      "Institute of marketing & management is a top-ranked MBA college in Delhi. Industry-focused curriculum, excellent placements, and strong alumni network.",
-    type: "website",
-    url: "https://immindia.edu.in",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "IMM - Best MBA Colleges in Delhi NCR | PGDM Colleges in India",
-    description:
-      "Institute of marketing & management is a top-ranked MBA college in Delhi. Industry-focused curriculum, excellent placements, and strong alumni network.",
-  },
-};
+export const metadata = generateMetadataForPath("/");
 
 export default function RootLayout({ children }) {
   return (
