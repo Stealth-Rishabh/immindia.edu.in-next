@@ -17,7 +17,7 @@ export function findMetadataByPath(path) {
 
   // If no exact match, return default metadata
   return {
-    title: "IMM - Institute of Marketing & Management",
+    title: "Best MBA Colleges in Delhi NCR | PGDM Colleges in India | IMM ",
     description:
       "Institute of Marketing & Management (IMM) is a top-ranked MBA college in Delhi. Industry-focused curriculum, excellent placements, and strong alumni network.",
     canonical: `https://immindia.edu.in${cleanPath}`,
