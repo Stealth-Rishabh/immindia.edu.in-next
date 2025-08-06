@@ -162,7 +162,7 @@ const staticRoutes = [
 async function fetchBlogPosts() {
   try {
     const response = await fetch(
-      `${WORDPRESS_BLOG_API}?per_page=100&_fields=slug,modified`,
+      `${WORDPRESS_BLOG_API}?per_page=100&_fields=slug,modified,status`,
       {
         next: { revalidate: 3600 }, // Cache for 1 hour
       }
@@ -174,7 +174,13 @@ async function fetchBlogPosts() {
     }
 
     const posts = await response.json();
-    return posts.map((post) => ({
+
+    // Filter only published posts and ensure they have required fields
+    const publishedPosts = posts.filter(
+      (post) => post.status === "publish" && post.slug && post.modified
+    );
+
+    return publishedPosts.map((post) => ({
       url: `/blog/${post.slug}`,
       lastModified: new Date(post.modified),
       changeFrequency: "weekly",
@@ -199,10 +205,20 @@ async function fetchCareerPosts() {
     }
 
     const careers = await response.json();
-    return careers.map((career) => ({
+
+    // Filter only active careers and ensure they have required fields
+    const activeCareers = careers.filter(
+      (career) =>
+        career.slug &&
+        (career.status === "active" ||
+          career.status === "published" ||
+          !career.status)
+    );
+
+    return activeCareers.map((career) => ({
       url: `/career/${career.slug}`,
       lastModified: new Date(
-        career.updated_at || career.created_at || Date.now()
+        career.updated_at || career.created_at || career.modified || Date.now()
       ),
       changeFrequency: "weekly",
       priority: 0.7,
