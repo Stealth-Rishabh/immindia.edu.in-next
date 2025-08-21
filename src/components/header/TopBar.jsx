@@ -14,6 +14,7 @@ import {
 import { RiTwitterXLine } from "react-icons/ri";
 import Image from "next/image";
 import { useMarquee } from "../../context/MarqueeContext.jsx";
+import Marquee from "@/components/ui/marquee";
 
 const img = "/assets/header/QR-img.webp";
 
@@ -123,9 +124,15 @@ const TopBar = () => {
         {/* Marquee */}
         <div className="text-pink-700 justify-center items-center bg-slate-50 p-3 gap-2 rounded-full border shadow-sm flex w-96 overflow-hidden">
           <div className="h-2 w-2 bg-pink-900 rounded-full animate-ping"></div>
-          <marquee className="font-bold" behavior="scroll" direction="left">
-            {marqueeText} | {marqueeText} | {marqueeText} | {marqueeText}
-          </marquee>
+          <Marquee
+            pauseOnHover
+            isPlaying
+            className="[--duration:5s] [--gap:0rem] w-full"
+          >
+            <span className="font-bold whitespace-nowrap">
+              {marqueeText} |&nbsp;
+            </span>
+          </Marquee>
         </div>
 
         {/* Contact Info */}

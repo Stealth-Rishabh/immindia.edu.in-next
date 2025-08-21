@@ -4,6 +4,8 @@ import Providers from "../components/Providers";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { generateMetadataForPath } from "@/lib/metadata";
+import ScrollToTop from "../components/ScrollToTop";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +17,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = generateMetadataForPath("/");
+export const metadata = {
+  ...generateMetadataForPath("/"),
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+    other: {
+      rel: "icon",
+      url: "/favicon.ico",
+    },
+  },
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -25,6 +38,8 @@ export default function RootLayout({ children }) {
           <Header />
           <main>{children}</main>
           <Footer />
+          <ScrollToTop />
+          <WhatsAppButton />
         </Providers>
       </body>
     </html>
