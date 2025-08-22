@@ -6,6 +6,7 @@ import Footer from "../components/footer/Footer";
 import { generateMetadataForPath } from "@/lib/metadata";
 import ScrollToTop from "../components/ScrollToTop";
 import WhatsAppButton from "../components/WhatsAppButton";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      {process.env.NODE_ENV === "production" && (
+        <>
+          <GoogleTagManager gtmId="GTM-TV5GXGQ" />
+          <GoogleAnalytics gaId="G-08HKSL82EN" />
+        </>
+      )}
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>
           <Header />
